@@ -1,4 +1,4 @@
-<Config>
+<Config> 
 	<SpMetadataPath>D:\LAVORO\PROGETTI\saml2-centralized-sp\config\sp-metadata.xml</SpMetadataPath>
 	<SignSpMetadata>false</SignSpMetadata>
 	
