@@ -1,0 +1,63 @@
+<md:EntityDescriptor entityID="SAML2CentralizedSP" 
+					xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" 
+					xmlns:xml="http://www.w3.org/XML/1998/namespace">
+	<md:SPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+		<md:Extensions>
+			<idpdisc:DiscoveryResponse index="1" 
+							xmlns:idpdisc="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol" 
+							Binding="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol" 
+							Location="http://localhost:8080/saml2-centralized-sp/PRODUCER"/>
+		</md:Extensions>
+		<md:KeyDescriptor use="signing">
+			<ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+				<ds:X509Data>
+					<ds:X509Certificate>MIIDXzCCAkegAwIBAgIEHkXaHjANBgkqhkiG9w0BAQsFADBgMRAwDgYDVQQGEwdV
+bmtub3duMRAwDgYDVQQIEwdVbmtub3duMRAwDgYDVQQHEwdVbmtub3duMQwwCgYD
+VQQKEwNvY3AxDDAKBgNVBAsTA29jcDEMMAoGA1UEAxMDb2NwMB4XDTE1MDYwOTE3
+MjcyMVoXDTE2MDYwMzE3MjcyMVowYDEQMA4GA1UEBhMHVW5rbm93bjEQMA4GA1UE
+CBMHVW5rbm93bjEQMA4GA1UEBxMHVW5rbm93bjEMMAoGA1UEChMDb2NwMQwwCgYD
+VQQLEwNvY3AxDDAKBgNVBAMTA29jcDCCASIwDQYJKoZIhvcNAQEBBQADggEPADCC
+AQoCggEBAITAsN+ivcK/4rHzwIi4TGGf9PyQhKLFRP1O2zUmz9rY5nsRMPUiZsGv
+dtpzUSoswWyhm8c8KjyyYDE3Ter0kdRlF7jigAyNUAhH6KBP94U+jkIJxHSs53vo
+JG3K3U6VVO+k2VBqISL+tR9a+J0OmIuSQdncJVwVcZIaD2AdeHQoU1DoPo4rUpdj
+8wKkxbhD464TJPZkVAbIQMeuNP47KOQ0rml0Mt6YbTSN0QE6CpP0+NbVBe8nmSeX
+5j4+FOuLJlogW1IWXD8tsCjfXvVds0lL7vrFTfeXLHp1ibi7gSeTk5Z8ezBnQZP5
+tYxYYWD/J8Dr+XXEc4BZgflBH1eh7PECAwEAAaMhMB8wHQYDVR0OBBYEFEdu4lE9
+VJoEA2ioVROV0uKNCzVvMA0GCSqGSIb3DQEBCwUAA4IBAQAZ9B0xPdaM/MDuObTl
+umphj4kwJBpvOzt7Q4Kq0B93aVEkjecc1s/RnESLG9ra7bY7vDdod6BKmP1pBoW1
+nWy9/g2me4WT6sBsZ5DgNp/ZTL7n1EeYSpcMsa4jPL7MsRodcRHo8qgJhit8j5XM
+kVzDGBCmjpr3jO31KG8cHS/oCLwvlmrzBpl+A7XmWbri1juW9+oOu57qfCaPAo8h
+wOL/2MKGoJbarhTUw4JDiWAzhxZTc2E3lQ8W43/hrPGyOg/e4AXir41R/te5Prnk
+DzrwXOoIa05CPnPhs3UeuWdt+vA+ppvv04Dm1qVkfgLHgggi/PAnKG+TTFYOCms8
+IlXR</ds:X509Certificate>
+				</ds:X509Data>
+			</ds:KeyInfo>
+		</md:KeyDescriptor>
+
+		<md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" 
+    							Location="http://localhost:8080/saml2-centralized-sp/LOGOUT" 
+    							ResponseLocation="http://localhost:8080/saml2-centralized-sp/LOGOUT"/>
+
+		<md:NameIDFormat>urn:mace:shibboleth:1.0:nameIdentifier</md:NameIDFormat>
+		<md:NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</md:NameIDFormat>
+
+		<md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" 
+    								Location="http://localhost:8080/saml2-centralized-sp/CONSUMER" 
+    								index="1"/>
+    	<md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" 
+    								Location="http://localhost:8080/saml2-centralized-sp/CONSUMER" 
+    								index="2"/>
+
+		<md:AttributeConsumingService index="1">
+			<md:ServiceName xml:lang="it">Servizio 1</md:ServiceName>
+			<md:RequestedAttribute Name="login" isRequired="false" FriendlyName="login" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified"/>
+			<md:RequestedAttribute Name="tipo_autenticazione" isRequired="false" FriendlyName="tipo_autenticazione" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified"/>
+		</md:AttributeConsumingService>
+
+	</md:SPSSODescriptor>
+	<md:Organization>
+		<md:OrganizationName xml:lang="en">saml2-centralized-sp</md:OrganizationName>
+		<md:OrganizationDisplayName xml:lang="en">saml2-centralized-sp</md:OrganizationDisplayName>
+		<md:OrganizationURL xml:lang="en"></md:OrganizationURL>
+	</md:Organization>
+</md:EntityDescriptor>

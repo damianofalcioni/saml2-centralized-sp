@@ -1,0 +1,295 @@
+<md:EntitiesDescriptor
+    Name="urn:mace:shibboleth:testshib:two"
+    xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
+    xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata"
+    xmlns:shibmd="urn:mace:shibboleth:metadata:1.0"
+	xmlns:mdui="urn:oasis:names:tc:SAML:metadata:ui"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+
+
+
+<md:EntityDescriptor entityID="SAML2CentralizedSP" 
+					xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" 
+					xmlns:xml="http://www.w3.org/XML/1998/namespace">
+	<md:SPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+		<md:Extensions>
+			<idpdisc:DiscoveryResponse index="1" 
+							xmlns:idpdisc="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol" 
+							Binding="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol" 
+							Location="http://localhost:8080/saml2-centralized-sp/PRODUCER"/>
+		</md:Extensions>
+		<md:KeyDescriptor use="signing">
+			<ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+				<ds:X509Data>
+					<ds:X509Certificate>MIIDXzCCAkegAwIBAgIEHkXaHjANBgkqhkiG9w0BAQsFADBgMRAwDgYDVQQGEwdV
+bmtub3duMRAwDgYDVQQIEwdVbmtub3duMRAwDgYDVQQHEwdVbmtub3duMQwwCgYD
+VQQKEwNvY3AxDDAKBgNVBAsTA29jcDEMMAoGA1UEAxMDb2NwMB4XDTE1MDYwOTE3
+MjcyMVoXDTE2MDYwMzE3MjcyMVowYDEQMA4GA1UEBhMHVW5rbm93bjEQMA4GA1UE
+CBMHVW5rbm93bjEQMA4GA1UEBxMHVW5rbm93bjEMMAoGA1UEChMDb2NwMQwwCgYD
+VQQLEwNvY3AxDDAKBgNVBAMTA29jcDCCASIwDQYJKoZIhvcNAQEBBQADggEPADCC
+AQoCggEBAITAsN+ivcK/4rHzwIi4TGGf9PyQhKLFRP1O2zUmz9rY5nsRMPUiZsGv
+dtpzUSoswWyhm8c8KjyyYDE3Ter0kdRlF7jigAyNUAhH6KBP94U+jkIJxHSs53vo
+JG3K3U6VVO+k2VBqISL+tR9a+J0OmIuSQdncJVwVcZIaD2AdeHQoU1DoPo4rUpdj
+8wKkxbhD464TJPZkVAbIQMeuNP47KOQ0rml0Mt6YbTSN0QE6CpP0+NbVBe8nmSeX
+5j4+FOuLJlogW1IWXD8tsCjfXvVds0lL7vrFTfeXLHp1ibi7gSeTk5Z8ezBnQZP5
+tYxYYWD/J8Dr+XXEc4BZgflBH1eh7PECAwEAAaMhMB8wHQYDVR0OBBYEFEdu4lE9
+VJoEA2ioVROV0uKNCzVvMA0GCSqGSIb3DQEBCwUAA4IBAQAZ9B0xPdaM/MDuObTl
+umphj4kwJBpvOzt7Q4Kq0B93aVEkjecc1s/RnESLG9ra7bY7vDdod6BKmP1pBoW1
+nWy9/g2me4WT6sBsZ5DgNp/ZTL7n1EeYSpcMsa4jPL7MsRodcRHo8qgJhit8j5XM
+kVzDGBCmjpr3jO31KG8cHS/oCLwvlmrzBpl+A7XmWbri1juW9+oOu57qfCaPAo8h
+wOL/2MKGoJbarhTUw4JDiWAzhxZTc2E3lQ8W43/hrPGyOg/e4AXir41R/te5Prnk
+DzrwXOoIa05CPnPhs3UeuWdt+vA+ppvv04Dm1qVkfgLHgggi/PAnKG+TTFYOCms8
+IlXR</ds:X509Certificate>
+				</ds:X509Data>
+			</ds:KeyInfo>
+		</md:KeyDescriptor>
+		<md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" 
+    							Location="http://localhost:8080/saml2-centralized-sp/LOGOUT" 
+    							ResponseLocation="http://localhost:8080/saml2-centralized-sp/LOGOUT"/>
+		<md:NameIDFormat>urn:mace:shibboleth:1.0:nameIdentifier</md:NameIDFormat>
+		<md:NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</md:NameIDFormat>
+		<md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" 
+    								Location="http://localhost:8080/saml2-centralized-sp/CONSUMER" 
+    								index="1"/>
+		<md:AttributeConsumingService index="1">
+			<md:ServiceName xml:lang="it">Servizio 1</md:ServiceName>
+			<md:RequestedAttribute Name="login" isRequired="true" FriendlyName="login" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified"/>
+			<md:RequestedAttribute Name="tipo_autenticazione" isRequired="false" FriendlyName="tipo_autenticazione" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified"/>
+		</md:AttributeConsumingService>
+	</md:SPSSODescriptor>
+	<md:Organization>
+		<md:OrganizationName xml:lang="en">saml2-centralized-sp</md:OrganizationName>
+		<md:OrganizationDisplayName xml:lang="en">saml2-centralized-sp</md:OrganizationDisplayName>
+		<md:OrganizationURL xml:lang="en"></md:OrganizationURL>
+	</md:Organization>
+</md:EntityDescriptor>
+
+
+
+
+
+<md:EntityDescriptor entityID="cohesion.regione.marche.it:idp" xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:xml="http://www.w3.org/XML/1998/namespace" xmlns:shibmd="urn:mace:shibboleth:metadata:1.0">
+  <md:IDPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol" WantAuthnRequestsSigned="true">
+    <md:Extensions>
+      <shibmd:Scope regexp="false">regione.marche.it</shibmd:Scope>
+    </md:Extensions>
+    <md:KeyDescriptor use="signing">
+      <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+        <ds:X509Data>
+          <ds:X509Certificate>
+            MIIHkTCCBnmgAwIBAgIKYbjzmAAAAAAAmzANBgkqhkiG9w0BAQUFADBVMRUwEwYK
+            CZImiZPyLGQBGRYFaW50cmExHTAbBgoJkiaJk/IsZAEZFg1yZWdpb25lbWFyY2hl
+            MR0wGwYDVQQDExRSZWdpb25lTWFyY2hlLVNVQkNBMTAeFw0xNDAzMTkxNDIwMjJa
+            Fw0xODAzMTgxNDIwMjJaMIG5MQswCQYDVQQGEwJJVDEOMAwGA1UECBMFSVRBTFkx
+            DzANBgNVBAcTBkFuY29uYTEXMBUGA1UEChMOUmVnaW9uZSBNYXJjaGUxDDAKBgNV
+            BAsTA0lORjEsMCoGA1UEAxMjY29oZXNpb24yc3ZpbHVwcG8ucmVnaW9uZS5tYXJj
+            aGUuaXQxNDAyBgkqhkiG9w0BCQEWJXJvYmVydG8ucGlhbmdlcmVsbGlAcmVnaW9u
+            ZS5tYXJjaGUuaXQwggIiMA0GCSqGSIb3DQEBAQUAA4ICDwAwggIKAoICAQCjljyd
+            gpxu7Df6uIHiKZrRrFvj2A4qpXYm4PN1n/4gmLpb8uI7989oy6OEV/IR9EA0V/X5
+            RXBTZHe4BzI+uCjNxPms0Lm8O3T1f5T60qyJHjmYTqZak63PW7oRVaO9i1fxu/a2
+            BrQvLwnbL/3Vfk5qPdT30PERFo3zzp6OrM9lW7IioZKFI8cz1e18C9ZF0eb34JUT
+            6Zvrjqol2mzRh+TcqsSDpt2H8bJX4jY+6SwxyzXS+vfh9OfrtK5hIxIamdmHyX/G
+            bgmOIMohLl+e/nD6vpxUerJOu2ul5eBlPxMAhydqdMgVZnsLUpok6sO+ClPQQvlb
+            bStAEUPIh3oIGjaVf2H0wf2yt2tu07IuvQkfg7VRVWuzsIakax830jLhcJUprs+c
+            AJVFREVYEN/CGUIL2zEEjQuH2XhhFtcSCRKkEHH9IUbXA167+FAQ/3Cf78rtI1Ih
+            Kv0AX9qs+muDBe6juybCnQ3kvxKikYPHMRyO+OBUwVN3HuPL7eb0/Rslt2dFbG2M
+            B+2Mviqmqgc1nTQqmPfGHwSMRqLMS7jKLSqkQbwC2T8s72v8uqK9QwQiTbPl/33K
+            W5pRS/zKq0jSTp88RPNPUCznc1rwqFq7hBwLGrjtKxkZJ/GQvR1A8BTBtazPQKpW
+            ujdecRpURNlDgK9/8TAYxdcORHwfTNsoqRMUCQIDAQABo4IC/DCCAvgwCwYDVR0P
+            BAQDAgWgMDwGCSsGAQQBgjcVBwQvMC0GJSsGAQQBgjcVCIe/7iGD4O4Nh8WFHofY
+            /nvCg1FNg5qhG4S/riECAWQCAQMwHQYDVR0OBBYEFBlo4zijrkJWf6b1F0Ra8zYl
+            0qmTMB8GA1UdIwQYMBaAFPRzqpKcsckUqwMS3uJ8LXQNFEeZMIIBHAYDVR0fBIIB
+            EzCCAQ8wggELoIIBB6CCAQOGgcVsZGFwOi8vL0NOPVJlZ2lvbmVNYXJjaGUtU1VC
+            Q0ExLENOPVJFTUFDQVNVQixDTj1DRFAsQ049UHVibGljJTIwS2V5JTIwU2Vydmlj
+            ZXMsQ049U2VydmljZXMsQ049Q29uZmlndXJhdGlvbixEQz1yZWdpb25lbWFyY2hl
+            LERDPWludHJhP2NlcnRpZmljYXRlUmV2b2NhdGlvbkxpc3Q/YmFzZT9vYmplY3RD
+            bGFzcz1jUkxEaXN0cmlidXRpb25Qb2ludIY5aHR0cDovL3BraS5yZWdpb25lLm1h
+            cmNoZS5pdC9DRFAvUmVnaW9uZU1hcmNoZS1TVUJDQTEuY3JsMIIBFwYIKwYBBQUH
+            AQEEggEJMIIBBTCBuwYIKwYBBQUHMAKGga5sZGFwOi8vL0NOPVJlZ2lvbmVNYXJj
+            aGUtU1VCQ0ExLENOPUFJQSxDTj1QdWJsaWMlMjBLZXklMjBTZXJ2aWNlcyxDTj1T
+            ZXJ2aWNlcyxDTj1Db25maWd1cmF0aW9uLERDPXJlZ2lvbmVtYXJjaGUsREM9aW50
+            cmE/Y0FDZXJ0aWZpY2F0ZT9iYXNlP29iamVjdENsYXNzPWNlcnRpZmljYXRpb25B
+            dXRob3JpdHkwRQYIKwYBBQUHMAKGOWh0dHA6Ly9wa2kucmVnaW9uZS5tYXJjaGUu
+            aXQvQUlBL1JlZ2lvbmVNYXJjaGUtU1VCQ0ExLmNydDATBgNVHSUEDDAKBggrBgEF
+            BQcDATAbBgkrBgEEAYI3FQoEDjAMMAoGCCsGAQUFBwMBMA0GCSqGSIb3DQEBBQUA
+            A4IBAQBYPs/vX5Npcpu4tMUAhdoNaIfW2gzlyl06ocK2KSAxDRpdMdDmM83KQuEA
+            idO2wcva0c0Yzcxa1JPQ+xO32oWgbpeZMHNXQ/UoCoirz07dYe1u6+XweTUI/67r
+            f+fLNGGQMhh/HCffK4B6njyhjcDLN0Op8R8gU4dSKHvBf+VFXq43Qk/YN9h1cnVp
+            TQJqA2+QtCtoqYoumHRZg80T4sT9U+piXHzR/iFwe6AS+vayxK9CK/g37XuIv7ee
+            ON9PKowBmAvrVIeT2OKLwT79sLrFtd4WEp4Zu4bXCdL7m+RBUgwQtjGr/aHuk/ow
+            ipqoLLlSvBI5i17j8Vz+qBr+j0fn
+          </ds:X509Certificate>
+          <ds:X509Certificate>
+            MIIFTzCCAzegAwIBAgIKEVebEgAAAAAAAjANBgkqhkiG9w0BAQUFADBEMQswCQYD
+            VQQGEwJJVDEXMBUGA1UEChMOUmVnaW9uZSBNQXJjaGUxHDAaBgNVBAMTE1JFR0lP
+            TkUtTUFSQ0hFLVJPT1QwHhcNMTIwMzI3MTMxNTU4WhcNMjYwMzI3MTMyNTU4WjBV
+            MRUwEwYKCZImiZPyLGQBGRYFaW50cmExHTAbBgoJkiaJk/IsZAEZFg1yZWdpb25l
+            bWFyY2hlMR0wGwYDVQQDExRSZWdpb25lTWFyY2hlLVNVQkNBMTCCASIwDQYJKoZI
+            hvcNAQEBBQADggEPADCCAQoCggEBAK+BQLvDhPPO8ue0jaFAsYSB1xQc4LiyTUNx
+            oksSyZcFS2qmYo/BWP8Ca97PzqOvJHWLt5hO4drLwegBGQ2+IC15zqikFqrcwLeJ
+            N5a9/0z/wxs7T9hunvHoo9+P5j9mqgYiUPyad4EghWPm9zh6SnqyhEbXKEw+fiBr
+            mECV45QTO54P78l+kCnZq8BkqmV1fZmCltJ7xzarDu3Z3wKmF9uQTfIPzAWtq3D0
+            W7UfPsbFQWy3ayAcxYtY/kj/12ABtyEnU/Eldlu4NQEBzXqUCwkAkUPTF/rJ6QPC
+            w0r0FN2z9yDPIH0sdcEpJDiR57X5fe4bspiLEJ2lL5uhpm+UOSkCAwEAAaOCATAw
+            ggEsMBAGCSsGAQQBgjcVAQQDAgEAMB0GA1UdDgQWBBT0c6qSnLHJFKsDEt7ifC10
+            DRRHmTAZBgkrBgEEAYI3FAIEDB4KAFMAdQBiAEMAQTALBgNVHQ8EBAMCAYYwDwYD
+            VR0TAQH/BAUwAwEB/zAfBgNVHSMEGDAWgBR47ZCuKPAi57upZWTxmZIudvqeJjBJ
+            BgNVHR8EQjBAMD6gPKA6hjhodHRwOi8vcGtpLnJlZ2lvbmUubWFyY2hlLml0L0NE
+            UC9SRUdJT05FLU1BUkNIRS1ST09ULmNybDBUBggrBgEFBQcBAQRIMEYwRAYIKwYB
+            BQUHMAKGOGh0dHA6Ly9wa2kucmVnaW9uZS5tYXJjaGUuaXQvQUlBL1JFR0lPTkUt
+            TUFSQ0hFLVJPT1QuY3J0MA0GCSqGSIb3DQEBBQUAA4ICAQCmXB/Jt5sZFhBHiTZX
+            Fz0VE+xvIp8+KhKUU4L6Cx4abOPFlDXxl+8JlxADKIYoaQ0LCETx3yneOLOfzi4T
+            9pp7F53/Xxh8ShVyL2RQ5f+i/TUsCmo+R6CvzIweWFfQUMyR+gFY6MTLrobAFy9Q
+            MpXlxsQKuqwQfLE/4c8GN7qzOz19zAArI9DhPCeS8maOyNbsf6Pp8d6aJkBGrlyM
+            9p1RirJTlmq9FcgYNQoLH4UQdErPyDj99Vul3IL7sDDvH9hQawaz+3xGWIe4oGM7
+            izTlJsjGXt4FU8F2Y2mHzcEs44qArwVwSTU0wv6i25Qc2+q9nvpWCoZXTUnnsTKL
+            xDqNDWj0DXLBp/OtG/Kdy+JYtfwZ623SC+QQkCxj731cyduT7L267DeutjmrcGY3
+            eU6mllrGVsvWGT3s4b1GBJSEpBmaijsMVi1m1pdFl2M0n+5FUqNeC8X7fo5bvEan
+            NmizdB0CBLnjPV69DhRol/KtiFMvE0hWM37rfG7MGugRuWgz/Qfmzfn8rKGqRyXJ
+            HAtK8D4viTqfU70cggh+JBLcGplejRWdL16ys/VMvwgZBs4a0HGwni+gWGYG2Ioy
+            YZ9u01CaIir3Xe9piJ5v90LvWAwNVrUEcdo4Yem7Hb1ITmsY+2XgM1SdLsuefp4s
+            9NITJN0S8oFLJ+hh0FheeLibmw==
+          </ds:X509Certificate>
+          <ds:X509Certificate>
+            MIIGMjCCBBqgAwIBAgIQMC7sWYBCeIRCB2RY3MYk9jANBgkqhkiG9w0BAQUFADBE
+            MQswCQYDVQQGEwJJVDEXMBUGA1UEChMOUmVnaW9uZSBNQXJjaGUxHDAaBgNVBAMT
+            E1JFR0lPTkUtTUFSQ0hFLVJPT1QwHhcNMTIwMzI3MTAwNDUzWhcNMzIwMzI3MTAx
+            NDQ0WjBEMQswCQYDVQQGEwJJVDEXMBUGA1UEChMOUmVnaW9uZSBNQXJjaGUxHDAa
+            BgNVBAMTE1JFR0lPTkUtTUFSQ0hFLVJPT1QwggIiMA0GCSqGSIb3DQEBAQUAA4IC
+            DwAwggIKAoICAQC7SwemN6WB/cINrVyv+LHIcgaiFDBEMe5zJXTkCLOXGLiWptGb
+            k0OllyEsWvRmPgS47TpNaC1LWEAh5833cwNtaEBYLLlVKJC2kvmXwLRPutF8E32p
+            +e0crLDsvuXvZxrAMUiXd2Orjt6Ba23T2BJPcByuZwE5X1YvQFHQyacSGNEkMG2w
+            tPnMQpjjYBmzWhxzI98wXZdAmVhdo15CE/VchbaJ9tZtzlAhxjQ6+axTqJ8svcnP
+            0+38mgDI4/TspGzG3Tj0GyOU4NbqgRy2YppJ+ilyMwpftnP4uje0YPqZaVLar90R
+            KDF9ONoQfBTIx7yBbWUtaqOuaxxVqkTvjpsXRIZJa87SLA43HBODaupDpFWZ5ZuZ
+            A1W5bGvp4/tueD7csPdHhKI5ys548AhMNtxzjOZdd/wJqcJ/f02YF3uAZ5G+QyjA
+            IAbTEQr6Cy12+VYaJhM2JC1RYW6IfDnm48NhDayNqDn1/okHjus2cuvkMW/6vUDP
+            Ln1a7D3FmVby1osd3bXk21bVW8eadWwfD+88jFRc4GUm6CyGu+vh9b2xjTW8kd5Z
+            UiafEdDdZb70EItdMRErjAhsPfHTbryBNaLMcetWuDncB7/KxnEMU+w+JLXCtEOZ
+            KGRFK5J8gwspgg1u96kbLDi5KBJHr9ATsUhXhEZ04qT3Eo5Na6pdpphnPwIDAQAB
+            o4IBHjCCARowCwYDVR0PBAQDAgGGMA8GA1UdEwEB/wQFMAMBAf8wHQYDVR0OBBYE
+            FHjtkK4o8CLnu6llZPGZki52+p4mMBAGCSsGAQQBgjcVAQQDAgEAMIHIBgNVHSAE
+            gcAwgb0wgboGICsGAQQBgjcVCIe/7iGD4O4Nh8WFHofY/nvCg1FNAYMSMIGVME0G
+            CCsGAQUFBwIBFkFodHRwOi8vcGtpLnJlZ2lvbmUubWFyY2hlLml0L0NQUy9SZWdp
+            b25lLU1hcmNoZS1MZWdhbC1wb2xpY3kuaHRtbDBEBggrBgEFBQcCAjA4HjYAUgBl
+            AGcAaQBvAG4AZQAtAE0AYQByAGMAaABlAC0ATABlAGcAYQBsAC0AcABvAGwAaQBj
+            AHkwDQYJKoZIhvcNAQEFBQADggIBALN+Cz8d61OQn+vUgwY6boOoUhx7G3che8ol
+            /qVYT209XS++JXxUBHO5nxVB0KD/6diG5yzk6SVBn2OWXz7xzeZh8Lpe3gioJN5O
+            qMzPb7j5poB+d957Foz/U3bU+Wwuz7hgyboV3of4JSYUR8UGHolbKpzwMLs5ucXj
+            TNz/yBmigDQdpUiBOQLRp1HPm+hGmi7h/ogWEYhnC+X5U/5EmeBr8DVnZkKE3cGx
+            fW4DwA5jXGovK/SPJMgtwBTPWaPsgFu7njvLtPnYoEdBZQc4iozxtha8t76saI1R
+            ioZ8FrrDTUsa6ah1kr6+WmZIEuPx7IGH2W+5/hbYO+Nb3A3EXY+6631IIm5t2i3N
+            +sy2zDkYc0poK4d/Tgy0RueFlEjXYIJJIBp1n8bfIUbivyTPzoojupz4jb1ss6rz
+            0JCiR9RgukjSq8c14PA+/liXHkgcgj0bmLX9MluqE0qfUD3k05L/CfA4RMDMvoAu
+            oSAw+rZhJ0D3wwLYfgMJO323ldES6DJPZFUZaGyc6fFY1Czi6OFcMJL20YQ1QI8L
+            NPj2wtkT1SKaDHyikS8dIAPaSUIGifrHQOtbKF8wScFHpefxmkSEPsXy6LMHLp1y
+            vP3YxjCaxkoUqv0u8DWt09mNgQIWDgyvGYe9FicA10Yz2PGOy8VyzS3yHnV2V/3P
+            Rq6Qev9J
+          </ds:X509Certificate>
+        </ds:X509Data>
+      </ds:KeyInfo>
+    </md:KeyDescriptor>
+    <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://cohesion2sviluppo.regione.marche.it/SSO/LogoutSAML.aspx" ResponseLocation="https://cohesion2sviluppo.regione.marche.it/SSO/LogoutSAML.aspx"/>
+    <md:SingleSignOnService Binding="urn:mace:shibboleth:1.0:profiles:AuthnRequest"  Location="https://cohesion2sviluppo.regione.marche.it/SSO/CheckSAML.aspx"/>
+    <md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://cohesion2sviluppo.regione.marche.it/SSO/CheckSAML.aspx"/>
+    <md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://cohesion2sviluppo.regione.marche.it/SSO/CheckSAML.aspx"/>
+    <!--
+    <saml:Attribute xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" Name="login"/>
+    <saml:Attribute xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" Name="tipo_autenticazione"/>
+    <saml:Attribute xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" Name="email"/>
+    <saml:Attribute xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" Name="titolo"/>
+    <saml:Attribute xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" Name="nome"/>
+    <saml:Attribute xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" Name="cognome"/>
+    <saml:Attribute xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" Name="sesso"/>
+    <saml:Attribute xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" Name="codice_fiscale"/>
+    <saml:Attribute xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" Name="telefono"/>
+    <saml:Attribute xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" Name="localita_nascita"/>
+    <saml:Attribute xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" Name="provincia_nascita"/>
+    <saml:Attribute xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" Name="data_nascita"/>
+    <saml:Attribute xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" Name="gruppo"/>
+    <saml:Attribute xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" Name="ruolo"/>
+    <saml:Attribute xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" Name="email_certificata"/>
+    <saml:Attribute xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" Name="indirizzo_residenza"/>
+    <saml:Attribute xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" Name="localita_residenza"/>
+    <saml:Attribute xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" Name="provincia_residenza"/>
+    <saml:Attribute xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" Name="cap_residenza"/>
+    <saml:Attribute xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" Name="urn:oid:1.3.6.1.4.1.5923.1.1.1.9" FriendlyName="eduPersonScopedAffiliation"/>
+    <saml:Attribute xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" Name="urn:oid:1.3.6.1.4.1.5923.1.1.1.10" FriendlyName="eduPersonTargetedID"/>
+    <saml:Attribute xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" Name="urn:oid:1.3.6.1.4.1.5923.1.1.1.6" FriendlyName="eduPersonPrincipalName"/>
+    <saml:Attribute xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" Name="urn:oid:0.9.2342.19200300.100.1.3" FriendlyName="mail"/>
+    <saml:Attribute xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" Name="spidCode"/>
+    <saml:Attribute xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" Name="name"/>
+    <saml:Attribute xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" Name="familyName"/>
+    <saml:Attribute xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" Name="gender"/>
+    -->
+  </md:IDPSSODescriptor>
+
+  <md:Organization>
+    <md:OrganizationName xml:lang="en">Regione Marche</md:OrganizationName>
+    <md:OrganizationDisplayName xml:lang="en">Regione Marche</md:OrganizationDisplayName>
+    <md:OrganizationURL xml:lang="en">http://www.regione.marche.it</md:OrganizationURL>
+  </md:Organization>
+
+</md:EntityDescriptor>
+
+
+
+
+
+
+
+
+<EntityDescriptor xmlns="urn:oasis:names:tc:SAML:2.0:metadata" entityID="https://idp.cs.unicam.it/idp/shibboleth" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:shibmd="urn:mace:shibboleth:metadata:1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><IDPSSODescriptor protocolSupportEnumeration="urn:mace:shibboleth:1.0 urn:oasis:names:tc:SAML:1.1:protocol urn:oasis:names:tc:SAML:2.0:protocol"><Extensions><shibmd:Scope regexp="false">unicam.it</shibmd:Scope></Extensions><KeyDescriptor><ds:KeyInfo><ds:X509Data><ds:X509Certificate>MIIEfDCCA2SgAwIBAgIRAOgs3+B31TERERfJASxzXvYwDQYJKoZIhvcNAQEFBQAw
+NjELMAkGA1UEBhMCTkwxDzANBgNVBAoTBlRFUkVOQTEWMBQGA1UEAxMNVEVSRU5B
+IFNTTCBDQTAeFw0xMzAxMjgwMDAwMDBaFw0xNjAxMjgyMzU5NTlaMFYxCzAJBgNV
+BAYTAklUMSwwKgYDVQQKDCNVbml2ZXJzaXTDoCBkZWdsaSBTdHVkaSBkaSBDYW1l
+cmlubzEZMBcGA1UEAxMQaWRwLmNzLnVuaWNhbS5pdDCCASIwDQYJKoZIhvcNAQEB
+BQADggEPADCCAQoCggEBAKT3N48e6nmcWjwBz3ePL+7tU5Nc+Lw26bQDeFWBSQvv
+kydsS1lXrgX3KOpQrRcPxJjGj9zGIjm7xtUVzWkPrrs31xOI32DJEwcXoGAE1xYu
+H2KiBJU0dOcBKFIzmG5gROYupg2nfFglw8c9UYon68ijwJyvrfJA5FVsDmHOV1ye
+UlL2xByb/+4xAObDcgh7Ch5o0Gftoo61whsrwmdUTtULdyYtxRXXrvVHn4+Kvhvb
+yOJTkO1FhqhYiZJg/pVqZE3oP7jm4juLJnyOgcCavCp6tUDG8PyDozO/pGf8TFUM
+AJZwhnDhGOVmDVmC1gAFKBip4S2U82x5//2UK+eiEgkCAwEAAaOCAWMwggFfMB8G
+A1UdIwQYMBaAFAy9k2gM896ro0lrKzdXR+qQ47ntMB0GA1UdDgQWBBR3pdAQO58E
+cxsg3VQr4ZHa5XCPGDAOBgNVHQ8BAf8EBAMCBaAwDAYDVR0TAQH/BAIwADAdBgNV
+HSUEFjAUBggrBgEFBQcDAQYIKwYBBQUHAwIwGAYDVR0gBBEwDzANBgsrBgEEAbIx
+AQICHTA6BgNVHR8EMzAxMC+gLaArhilodHRwOi8vY3JsLnRjcy50ZXJlbmEub3Jn
+L1RFUkVOQVNTTENBLmNybDBtBggrBgEFBQcBAQRhMF8wNQYIKwYBBQUHMAKGKWh0
+dHA6Ly9jcnQudGNzLnRlcmVuYS5vcmcvVEVSRU5BU1NMQ0EuY3J0MCYGCCsGAQUF
+BzABhhpodHRwOi8vb2NzcC50Y3MudGVyZW5hLm9yZzAbBgNVHREEFDASghBpZHAu
+Y3MudW5pY2FtLml0MA0GCSqGSIb3DQEBBQUAA4IBAQC26PQ1dLZLbyh3ju1J09C4
+oiR0SmJPN/R4U7HDQyl4XEKe5mSuCgQoLPdcmmLQAMtoLZYOLA4IJKKcSF35wnU2
+vX0bR2tykCgLm2MHwX6FLICf29LV1FrfU4JkzK5MWEwgldsJgE7z3sSlmnXQG+Qb
+ZFZil9eNRDQZufyYoGXYjmgD7OeipgCkiehoAmEwCma9bh+0g6HKxx+Sq0Lu3HB8
+LY1z9p7iDg7if8hjoMenPCR4IZnwo/h2GMCUbwYa662rz47L0ljNySq+tc8XbAIw
+rDw7hsCAc6V/pEBg0fiRxhcmkoGuctH13pNHAPNBIu0IXOn4SQbSOAuD0As+SpR2</ds:X509Certificate></ds:X509Data></ds:KeyInfo></KeyDescriptor><ArtifactResolutionService Binding="urn:oasis:names:tc:SAML:1.0:bindings:SOAP-binding" Location="https://idp.cs.unicam.it:8443/idp/profile/SAML1/SOAP/ArtifactResolution" index="1"/><ArtifactResolutionService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://idp.cs.unicam.it:8443/idp/profile/SAML2/SOAP/ArtifactResolution" index="2"/><NameIDFormat>urn:mace:shibboleth:1.0:nameIdentifier</NameIDFormat><NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</NameIDFormat><SingleSignOnService Binding="urn:mace:shibboleth:1.0:profiles:AuthnRequest" Location="https://idp.cs.unicam.it/idp/profile/Shibboleth/SSO"/><SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://idp.cs.unicam.it/idp/profile/SAML2/POST/SSO"/><SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST-SimpleSign" Location="https://idp.cs.unicam.it/idp/profile/SAML2/POST-SimpleSign/SSO"/><SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://idp.cs.unicam.it/idp/profile/SAML2/Redirect/SSO"/></IDPSSODescriptor><AttributeAuthorityDescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:1.1:protocol urn:oasis:names:tc:SAML:2.0:protocol"><Extensions><shibmd:Scope regexp="false">unicam.it</shibmd:Scope></Extensions><KeyDescriptor><ds:KeyInfo><ds:X509Data><ds:X509Certificate>MIIEfDCCA2SgAwIBAgIRAOgs3+B31TERERfJASxzXvYwDQYJKoZIhvcNAQEFBQAw
+NjELMAkGA1UEBhMCTkwxDzANBgNVBAoTBlRFUkVOQTEWMBQGA1UEAxMNVEVSRU5B
+IFNTTCBDQTAeFw0xMzAxMjgwMDAwMDBaFw0xNjAxMjgyMzU5NTlaMFYxCzAJBgNV
+BAYTAklUMSwwKgYDVQQKDCNVbml2ZXJzaXTDoCBkZWdsaSBTdHVkaSBkaSBDYW1l
+cmlubzEZMBcGA1UEAxMQaWRwLmNzLnVuaWNhbS5pdDCCASIwDQYJKoZIhvcNAQEB
+BQADggEPADCCAQoCggEBAKT3N48e6nmcWjwBz3ePL+7tU5Nc+Lw26bQDeFWBSQvv
+kydsS1lXrgX3KOpQrRcPxJjGj9zGIjm7xtUVzWkPrrs31xOI32DJEwcXoGAE1xYu
+H2KiBJU0dOcBKFIzmG5gROYupg2nfFglw8c9UYon68ijwJyvrfJA5FVsDmHOV1ye
+UlL2xByb/+4xAObDcgh7Ch5o0Gftoo61whsrwmdUTtULdyYtxRXXrvVHn4+Kvhvb
+yOJTkO1FhqhYiZJg/pVqZE3oP7jm4juLJnyOgcCavCp6tUDG8PyDozO/pGf8TFUM
+AJZwhnDhGOVmDVmC1gAFKBip4S2U82x5//2UK+eiEgkCAwEAAaOCAWMwggFfMB8G
+A1UdIwQYMBaAFAy9k2gM896ro0lrKzdXR+qQ47ntMB0GA1UdDgQWBBR3pdAQO58E
+cxsg3VQr4ZHa5XCPGDAOBgNVHQ8BAf8EBAMCBaAwDAYDVR0TAQH/BAIwADAdBgNV
+HSUEFjAUBggrBgEFBQcDAQYIKwYBBQUHAwIwGAYDVR0gBBEwDzANBgsrBgEEAbIx
+AQICHTA6BgNVHR8EMzAxMC+gLaArhilodHRwOi8vY3JsLnRjcy50ZXJlbmEub3Jn
+L1RFUkVOQVNTTENBLmNybDBtBggrBgEFBQcBAQRhMF8wNQYIKwYBBQUHMAKGKWh0
+dHA6Ly9jcnQudGNzLnRlcmVuYS5vcmcvVEVSRU5BU1NMQ0EuY3J0MCYGCCsGAQUF
+BzABhhpodHRwOi8vb2NzcC50Y3MudGVyZW5hLm9yZzAbBgNVHREEFDASghBpZHAu
+Y3MudW5pY2FtLml0MA0GCSqGSIb3DQEBBQUAA4IBAQC26PQ1dLZLbyh3ju1J09C4
+oiR0SmJPN/R4U7HDQyl4XEKe5mSuCgQoLPdcmmLQAMtoLZYOLA4IJKKcSF35wnU2
+vX0bR2tykCgLm2MHwX6FLICf29LV1FrfU4JkzK5MWEwgldsJgE7z3sSlmnXQG+Qb
+ZFZil9eNRDQZufyYoGXYjmgD7OeipgCkiehoAmEwCma9bh+0g6HKxx+Sq0Lu3HB8
+LY1z9p7iDg7if8hjoMenPCR4IZnwo/h2GMCUbwYa662rz47L0ljNySq+tc8XbAIw
+rDw7hsCAc6V/pEBg0fiRxhcmkoGuctH13pNHAPNBIu0IXOn4SQbSOAuD0As+SpR2</ds:X509Certificate></ds:X509Data></ds:KeyInfo></KeyDescriptor><AttributeService Binding="urn:oasis:names:tc:SAML:1.0:bindings:SOAP-binding" Location="https://idp.cs.unicam.it:8443/idp/profile/SAML1/SOAP/AttributeQuery"/><AttributeService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://idp.cs.unicam.it:8443/idp/profile/SAML2/SOAP/AttributeQuery"/><NameIDFormat>urn:mace:shibboleth:1.0:nameIdentifier</NameIDFormat><NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</NameIDFormat></AttributeAuthorityDescriptor><Organization><OrganizationName xmlns:xml="http://www.w3.org/XML/1998/namespace" xml:lang="it">Universita' degli studi di Camerino</OrganizationName><OrganizationName xmlns:xml="http://www.w3.org/XML/1998/namespace" xml:lang="en">Universita' degli studi di Camerino</OrganizationName><OrganizationDisplayName xmlns:xml="http://www.w3.org/XML/1998/namespace" xml:lang="it">Universita' di Camerino</OrganizationDisplayName><OrganizationDisplayName xmlns:xml="http://www.w3.org/XML/1998/namespace" xml:lang="en">Universita' di Camerino</OrganizationDisplayName><OrganizationURL xmlns:xml="http://www.w3.org/XML/1998/namespace" xml:lang="it">http://www.unicam.it</OrganizationURL><OrganizationURL xmlns:xml="http://www.w3.org/XML/1998/namespace" xml:lang="en">http://www.unicam.it</OrganizationURL></Organization><ContactPerson contactType="technical"><EmailAddress>marco.maccari@unicam.it</EmailAddress></ContactPerson></EntityDescriptor>
+
+
+
+
+
+</md:EntitiesDescriptor>

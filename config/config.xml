@@ -1,0 +1,41 @@
+<Config>
+	<SpMetadataPath>D:\LAVORO\PROGETTI\saml2-centralized-sp\config\sp-metadata.xml</SpMetadataPath>
+	<SignSpMetadata>false</SignSpMetadata>
+	
+	<Log logSamlRequests="true" logSamlResponses="true">
+		<FileSamlRequests>D:\LAVORO\PROGETTI\saml2-centralized-sp\logs\logReq.txt</FileSamlRequests>
+		<FileSamlResponses>D:\LAVORO\PROGETTI\saml2-centralized-sp\logs\logResp.txt</FileSamlResponses>
+		<FileGeneral>D:\LAVORO\PROGETTI\saml2-centralized-sp\logs\logGen.txt</FileGeneral>
+	</Log>
+	
+	<PrivateKeyInfo>
+		<KeystorePath>D:\LAVORO\PROGETTI\saml2-centralized-sp\config\keystore.p12</KeystorePath>
+		<KeystoreType>PKCS12</KeystoreType>
+		<PwdKeystore>password</PwdKeystore>
+		<AliasCertificate>selfsigned</AliasCertificate>
+		<PwdCertificate>password</PwdCertificate>
+	</PrivateKeyInfo>
+	
+	<Federations>
+		<Federation ID="default" autoSincronize="false" Desc="Federazione di default">
+			<LocalMetadataURI>D:\LAVORO\PROGETTI\saml2-centralized-sp\config\fed-metadata.xml</LocalMetadataURI>
+			<RemoteMetadataURI></RemoteMetadataURI>
+			<WAYF>http://localhost:8080/saml2-centralized-sp/wayf.jsp</WAYF>
+		</Federation>
+		<Agid ID="agid">
+			<RegistryURI></RegistryURI>
+			<LocalMetadataURI>D:\LAVORO\PROGETTI\saml2-centralized-sp\config\agid-metadata.xml</LocalMetadataURI>
+		</Agid>
+	</Federations>
+	
+	<EnabledHosts>
+		<Host ID="0" AttributeConsumingServiceIndex="1" UsePostBinding="true" SignSamlRequests="true" WayfLoadIdP="true" WayfIsPassive="false">
+			<Description>Test</Description>
+			<DnsHostName>localhost</DnsHostName>
+			<DnsHostName>localhostAlias</DnsHostName>
+			<ip>127.0.0.1</ip>
+			<ip>127.0.0.2</ip>
+			<FederationsEnabled>default</FederationsEnabled>
+		</Host>
+	</EnabledHosts>
+</Config>
