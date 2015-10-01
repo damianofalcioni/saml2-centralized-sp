@@ -226,9 +226,9 @@ IlXR</ds:X509Certificate>
   </md:IDPSSODescriptor>
 
   <md:Organization>
-    <md:OrganizationName xml:lang="en">Regione Marche</md:OrganizationName>
-    <md:OrganizationDisplayName xml:lang="en">Regione Marche</md:OrganizationDisplayName>
-    <md:OrganizationURL xml:lang="en">http://www.regione.marche.it</md:OrganizationURL>
+    <md:OrganizationName xml:lang="it">Regione Marche</md:OrganizationName>
+    <md:OrganizationDisplayName xml:lang="it">Regione Marche Test</md:OrganizationDisplayName>
+    <md:OrganizationURL xml:lang="it">http://www.regione.marche.it</md:OrganizationURL>
   </md:Organization>
 
 </md:EntityDescriptor>
