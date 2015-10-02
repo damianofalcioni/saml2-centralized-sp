@@ -88,7 +88,7 @@ public class LOGOUT extends HttpServlet {
 				/*
 				 2) se la risposta va bene allora :
 				 2.1) leggere da sessione tutti i servizi loggati con lo stesso idp del servizio
-				 2.2) aprire la loro pagina di logout con parametro remoteLogout=true (fare una chiamata interna http inviando i cookie)
+				 2.2) aprire la loro pagina di logout con parametro remoteLogout=true
 				 2.3) rimuovere da sessione i servizi sloggati
 				*/
 				String samlResponseB64 = request.getParameter("SAMLResponse");
@@ -113,7 +113,7 @@ public class LOGOUT extends HttpServlet {
 			if(request.getParameter("SAMLRequest")!=null && !request.getParameter("SAMLRequest").isEmpty()){
 				/*
 				 1) leggere da sessione tutti i servizi loggati con lo stesso idp del servizio
-				 2) aprire in una nuova scheda la loro pagina di logout con parametro remoteLogout=true (valutare se è fattibile fare una chiamata interna http inviando i cookie)
+				 2) aprire in una nuova scheda la loro pagina di logout con parametro remoteLogout=true
 				 3) rimuovere da sessione i servizi sloggati 
 				 4) ritornare una risposta di logout
 				 */

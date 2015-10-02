@@ -70,7 +70,7 @@ public class CONSUMER extends HttpServlet {
 			ssi.idpEntityID = idpEntityID;
 			request.getSession().setAttribute(relayState, ssi);
 			
-			response.sendRedirect("./AGGREGATOR?relayState="+URLEncoder.encode(relayState, "UTF-8")+"&idpEntityID="+URLEncoder.encode(idpEntityID, "UTF-8"));
+			response.sendRedirect("./AGGREGATOR?relayState="+URLEncoder.encode(relayState, "UTF-8"));
 			
 		}catch(Exception ex){Utils.log(ex.getMessage(), cfg, LogType.general);throw new ServletException(ex);}
 	}

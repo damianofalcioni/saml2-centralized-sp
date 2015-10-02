@@ -92,7 +92,7 @@ public class WAYF extends HttpServlet {
 					}
 				}
 				for(String fedId:fedIdList)
-					returnList += "\n"+fedId+","+fedId+",,,"; //TODO Ritornare un icona: salvarla o nem metadata della federazione o nel file di config
+					returnList += "\n"+fedId+","+fedId+",,,"; //TODO Ritornare un icona: salvarla o nel metadata della federazione o nel file di config
 				
 				out.print("OK"+returnList);
 				return;

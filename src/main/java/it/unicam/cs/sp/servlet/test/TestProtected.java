@@ -23,7 +23,6 @@ public class TestProtected extends HttpServlet {
 			
 			spc.protectPage(request, response);
 			
-			//response.getWriter().println("CIAO, SEI NELLA PAGINA PROTETTA");
 			response.getWriter().println(request.getSession().getAttribute("userAttributes"));
 			response.getWriter().println("<a href=\""+spc.getLogoutUrl()+"\">logout</a>");
 		} catch (Exception e) {

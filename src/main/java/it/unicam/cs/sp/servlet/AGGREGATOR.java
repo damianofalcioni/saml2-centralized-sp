@@ -8,13 +8,13 @@ import it.unicam.cs.saml.SAML2.AttributeInfo;
 import it.unicam.cs.saml.SAML2.NameIDFormat;
 import it.unicam.cs.saml.SAML2.ServiceSessionInfo;
 import it.unicam.cs.sp.config.Configuration;
-import it.unicam.cs.utils.Base64Fast;
 import it.unicam.cs.utils.NETUtils;
 import it.unicam.cs.utils.Utils;
 import it.unicam.cs.utils.X509Utils;
 import it.unicam.cs.utils.Utils.LogType;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.security.KeyStore.PrivateKeyEntry;
 
 import javax.servlet.ServletConfig;
@@ -35,13 +35,8 @@ public class AGGREGATOR extends HttpServlet {
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try{
-			java.io.PrintWriter out = response.getWriter();
+		try{			
 			String relayState = request.getParameter("relayState");
-			String idpEntityID = request.getParameter("idpEntityID");
-			
-			if(idpEntityID==null || idpEntityID=="")
-				throw new Exception("ERROR: idpEntityID is null");
 			if(relayState==null || relayState=="")
 				throw new Exception("ERROR: relayState is null");
 			
@@ -49,6 +44,7 @@ public class AGGREGATOR extends HttpServlet {
 			if(ssi==null)
 				throw new Exception("ERROR: Invalid Session State");
 			
+			String idpEntityID = ssi.idpEntityID;
 			String serviceURL = ssi.serviceURL;
 			String host = NETUtils.getHost(serviceURL);
 			int hostId = cfg.isHostAllowed(host);
@@ -60,11 +56,11 @@ public class AGGREGATOR extends HttpServlet {
 			AttributeInfo[] attributesRequired = SAML2.saml_getRequiredAttributes(cfg.getSpMetadataPath(), attributeConsumingServiceIndex);
 			AttributeInfo[] attributesMissing = SAML2.saml_getMissingAttributes(attributesRequired, attributesObtained);
 			
-			//TODO: cercare se in sessione su altri relayStetes c'è l'attributo che manca
+			//TODO: cercare se in sessione su altri relayStetes c'Ã¨ l'attributo che manca?
 			
 			if(attributesMissing.length!=0) {
 				String spEntityID = SAML2.saml_getEntityIDFromSingleMetadata(cfg.getSpMetadataPath());
-				String nameID = SAML2.saml_getAttributeInfo(attributesObtained, "spidCode").valueList[0]; //SPID richiede attributo codice fiscale (spidCode), altrimenti c'è da usare NameID
+				String nameID = SAML2.saml_getAttributeInfo(attributesObtained, "spidCode").valueList[0]; //SPID richiede attributo codice fiscale (spidCode), altrimenti c'Ã¨ da usare NameID
 				NameIDFormat nameIDFormat = NameIDFormat.unspecified;
 				PrivateKeyEntry privateKey = X509Utils.readPrivateKey(cfg.getKeystorePath(), cfg.getKeystoreType(), cfg.getPwdKeystore(), cfg.getAliasCertificate(), cfg.getPwdCertificate());
 				
@@ -108,11 +104,9 @@ public class AGGREGATOR extends HttpServlet {
 				ssi.attributesObtained = attributesObtained;
 				request.getSession().setAttribute(relayState, ssi);
 			}
-			
-			String xmlAuth = SAML2.sp_generateXML(attributesObtained);
-			String xmlAuthB64 = Base64Fast.encodeToString(xmlAuth.getBytes(), false);
-			out.println(NETUtils.getPOSTRedirectPage(serviceURL, "xmlAttrib="+xmlAuthB64));
-			
+
+			response.sendRedirect("./PoR?relayState="+URLEncoder.encode(relayState, "UTF-8"));
+
 		}catch(Exception ex){Utils.log(ex.getMessage(), cfg, LogType.general);throw new ServletException(ex);}
 	}
 
