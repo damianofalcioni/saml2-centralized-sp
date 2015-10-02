@@ -60,7 +60,7 @@ public class AGGREGATOR extends HttpServlet {
 			
 			if(attributesMissing.length!=0) {
 				String spEntityID = SAML2.saml_getEntityIDFromSingleMetadata(cfg.getSpMetadataPath());
-				String nameID = SAML2.saml_getAttributeInfo(attributesObtained, "spidCode").valueList[0]; //SPID richiede attributo codice fiscale (spidCode), altrimenti c'è da usare NameID
+				String nameID = SAML2.saml_getAttributeInfo(attributesObtained, "spidCode").valueList[0]; //SPID richiede attributo codice fiscale (spidCode), altrimenti c'è da usare NameID TODO: impostarlo da config
 				NameIDFormat nameIDFormat = NameIDFormat.unspecified;
 				PrivateKeyEntry privateKey = X509Utils.readPrivateKey(cfg.getKeystorePath(), cfg.getKeystoreType(), cfg.getPwdKeystore(), cfg.getAliasCertificate(), cfg.getPwdCertificate());
 				
@@ -76,6 +76,17 @@ public class AGGREGATOR extends HttpServlet {
 								Utils.log(samlResp, cfg, LogType.responses);
 								SAML2.sp_validateSamlResponse(samlResp, usableFederationPath, spEntityID, true);
 								AttributeInfo[] aaAttrList = SAML2.sp_getObtainedAttributes(samlResp);
+								
+								for(AttributeInfo aaAttr:aaAttrList)
+								    if(aaAttr.name.equals(attributeMissing.name) && aaAttr.nameFormat.equals(attributeMissing.nameFormat))
+								        if(aaAttr.valueList.length!=0){
+								            attributeMissing.valueList = aaAttr.valueList;
+								            break;
+								        }
+								if(attributeMissing.valueList.length==0)
+                                    throw new Exception("AA "+idpId+" returned no values for missing attribute "+attributeMissing.name+" format: "+attributeMissing.nameFormat);
+								
+								/*
 								if(aaAttrList.length!=1)
 									throw new Exception("AA "+idpId+" returned more than 1 attribute. Required only one.");
 								if(!(aaAttrList[0].name.equals(attributeMissing.name) && aaAttrList[0].nameFormat.equals(attributeMissing.nameFormat)))
@@ -83,6 +94,8 @@ public class AGGREGATOR extends HttpServlet {
 								if(aaAttrList[0].valueList.length==0)
 									throw new Exception("AA "+idpId+" returned no values for attribute "+aaAttrList[0].name+" format: "+aaAttrList[0].nameFormat);
 								attributeMissing.valueList = aaAttrList[0].valueList;
+								*/
+								
 								break;
 							}catch(Exception ex){
 								ex.printStackTrace();
