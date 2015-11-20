@@ -226,7 +226,7 @@ public class NETUtils {
 		return userAgentList.get(index);
 	}
 	
-
+	/*
 	public static void main(String[] args) {
 		try {
 			String url = "http://localhost:8080/CohesionServlet2/login.jsp?token=&amp;b&c=&d";
@@ -240,4 +240,5 @@ public class NETUtils {
 			e.printStackTrace();
 		}
 	}
+	*/
 }

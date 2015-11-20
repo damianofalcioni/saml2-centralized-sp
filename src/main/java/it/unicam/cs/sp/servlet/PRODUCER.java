@@ -44,11 +44,11 @@ public class PRODUCER extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try{
 			String idpEntityID = request.getParameter("entityID");
-			if(idpEntityID == null || idpEntityID == "")
+			if(idpEntityID == null || idpEntityID.isEmpty())
 				throw new Exception("ERROR: entityID not defined");
 			
 			String currentRelyState = (String)request.getSession().getAttribute("currentRelyState");
-			if(currentRelyState==null || currentRelyState == "")
+			if(currentRelyState==null || currentRelyState.isEmpty())
 				throw new Exception("ERROR: Invalid Session State");
 			
 			ServiceSessionInfo ssi = (ServiceSessionInfo)request.getSession().getAttribute(currentRelyState);
@@ -66,7 +66,13 @@ public class PRODUCER extends HttpServlet {
 			AuthnContext[] authnContextList = ssi.authnContextList;
 			AuthnContextComparison authnContextComparisonType = ssi.authnContextComparisonType;
 			
-
+			//SPID: in cui si richieda livelli di autenticazione superiori a SPIDL1 ( SPIDL2 o SPIDL3), forceAuthn deve essere true
+			boolean forceAuthn = true;
+			if(authnContextList!=null)
+			    for(AuthnContext authnContext:authnContextList)
+			        if(authnContext.equals(AuthnContext.SpidL1))
+			            forceAuthn = false;
+			
 			String spEntityID = SAML2.saml_getEntityIDFromSingleMetadata(cfg.getSpMetadataPath());
 			String fedMetadataPath = SAML2.saml_chooseFederationToUse(idpEntityID, spEntityID, cfg.getAllFederationMetadataURI());
 			
@@ -74,7 +80,7 @@ public class PRODUCER extends HttpServlet {
 			if(signRequest)
 				privateKey = X509Utils.readPrivateKey(cfg.getKeystorePath(), cfg.getKeystoreType(), cfg.getPwdKeystore(), cfg.getAliasCertificate(), cfg.getPwdCertificate());
 			
-			String samlRequest = SAML2.sp_generateSamlAuthnRequest(fedMetadataPath, spEntityID, idpEntityID, attributeConsumingServiceIndex, privateKey, postBinding, false, authnContextList, authnContextComparisonType);			
+			String samlRequest = SAML2.sp_generateSamlAuthnRequest(fedMetadataPath, spEntityID, idpEntityID, attributeConsumingServiceIndex, privateKey, postBinding, forceAuthn, authnContextList, authnContextComparisonType);			
 			String samlRequestB64 = Base64Fast.encodeToString(samlRequest.getBytes(), false);
 			
 			Utils.log(samlRequest, cfg, LogType.requests);

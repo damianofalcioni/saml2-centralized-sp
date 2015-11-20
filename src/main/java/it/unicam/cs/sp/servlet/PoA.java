@@ -55,7 +55,7 @@ public class PoA extends HttpServlet {
 			 </auth>
 			 */
 			String authB64 = request.getParameter("xmlAuth");
-			if(authB64==null || authB64=="")
+			if(authB64==null || authB64.isEmpty())
 				throw new Exception("ERROR: xmlAuth is null");
 
 			String auth = new String(Base64Fast.decode(authB64.getBytes()));

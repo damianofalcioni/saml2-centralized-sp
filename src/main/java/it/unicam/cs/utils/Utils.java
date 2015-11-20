@@ -16,7 +16,15 @@ public class Utils {
 		return sdf.format(new Date());
 	}
 	
+	   public static String getUTCTime(Date date){
+	        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+	        sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+	        return sdf.format(date);
+	    }
+	
 	public static Date stringToDate(String dateTime) throws Exception{
+	    if(dateTime.length()>24)
+	        dateTime = dateTime.substring(0, 23) + "Z";
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
 		sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
 		return sdf.parse(dateTime);

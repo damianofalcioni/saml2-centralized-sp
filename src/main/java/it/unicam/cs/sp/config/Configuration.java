@@ -3,9 +3,6 @@
  */
 package it.unicam.cs.sp.config;
 
-import java.net.URLDecoder;
-import java.net.URLEncoder;
-
 import javax.xml.xpath.XPathConstants;
 
 import it.unicam.cs.utils.XMLUtils;
@@ -23,7 +20,7 @@ public class Configuration {
 	}
 	
 	public Configuration(String filePath) throws Exception{
-		if(filePath==null || "".equals(filePath))
+		if(filePath==null || filePath.isEmpty())
 			configXml = XMLUtils.getXmlDocFromURI(Configuration.class.getResourceAsStream(defaultConfigFile));
 		else
 			configXml = XMLUtils.getXmlDocFromURI(filePath);
@@ -160,14 +157,16 @@ public class Configuration {
 		return (String) XMLUtils.execXPath(configXml.getDocumentElement(), "/Config/PrivateKeyInfo/PwdCertificate", XPathConstants.STRING);
 	}
 	
+	/*
 	public static void main(String[] args) throws Exception {
 		Configuration conf = new Configuration();
-		/*String[] ret = conf.getFederationToUpdate();
+		String[] ret = conf.getFederationToUpdate();
 		for(String r:ret)
 			System.out.println(r);
 		System.out.println(conf.getLocalFederationMetadataURI("test"));
-		*/
+		
 		System.out.println(conf.isHostAllowed("127.0.0.1"));
 		System.out.println(URLDecoder.decode(URLEncoder.encode("asd+dsa", "UTF-8"), "UTF-8"));
 	}
+    */
 }

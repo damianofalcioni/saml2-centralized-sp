@@ -33,6 +33,7 @@ public class TestLogout extends HttpServlet {
 		
 		response.sendRedirect("./TestLogin");
 		*/
+		response.getWriter().println("SUCCESSFULLY LOGGED OUT ");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

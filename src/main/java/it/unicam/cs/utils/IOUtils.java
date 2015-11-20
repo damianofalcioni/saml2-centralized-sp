@@ -92,7 +92,7 @@ public class IOUtils {
 		byte[] ret = new byte[0];
 
 		while (-1 != (tmpLength = is.read(buffer))){
-			if(totEstimatedLength != 0 && tmpLength == totEstimatedLength) //Se è vera verrà fatta solo al primo ciclo e non verranno creati ulteriori array, minimizzando la memoria usata.
+			if(totEstimatedLength != 0 && tmpLength == totEstimatedLength) //Se ï¿½ vera verrï¿½ fatta solo al primo ciclo e non verranno creati ulteriori array, minimizzando la memoria usata.
 				return buffer;
 			
 			totLength += tmpLength;
@@ -129,7 +129,7 @@ public class IOUtils {
 		output.close();
 		return ret;
 	}
-	
+	/*
 	public static void main(String args[]) {
 		//byte[] test = toByteArray(new java.io.FileInputStream("C:\\users\\mio\\desktop\\fulltext.pdf"));
 		//writeFile(test, "C:\\users\\mio\\desktop\\cloooone.pdf", false);
@@ -141,4 +141,5 @@ public class IOUtils {
 			System.out.println(orig);
 		}catch(Exception ex){ex.printStackTrace();}
 	}
+	*/
 }

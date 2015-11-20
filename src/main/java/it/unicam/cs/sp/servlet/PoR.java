@@ -1,6 +1,7 @@
 package it.unicam.cs.sp.servlet;
 
 import java.io.IOException;
+import java.security.KeyStore.PrivateKeyEntry;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -14,6 +15,7 @@ import it.unicam.cs.sp.config.Configuration;
 import it.unicam.cs.utils.Base64Fast;
 import it.unicam.cs.utils.NETUtils;
 import it.unicam.cs.utils.Utils;
+import it.unicam.cs.utils.X509Utils;
 import it.unicam.cs.utils.Utils.LogType;
 
 public class PoR extends HttpServlet {
@@ -33,7 +35,7 @@ public class PoR extends HttpServlet {
             java.io.PrintWriter out = response.getWriter();
             
             String relayState = request.getParameter("relayState");
-            if(relayState==null || relayState=="")
+            if(relayState==null || relayState.isEmpty())
                 throw new Exception("ERROR: relayState is null");
             
             ServiceSessionInfo ssi = (ServiceSessionInfo)request.getSession().getAttribute(relayState);
@@ -46,7 +48,8 @@ public class PoR extends HttpServlet {
             if(hostId == -1)
                 throw new Exception("ERROR: Host " + host + " is not allowed");
             
-            String xmlAuth = SAML2.sp_generateXML(ssi.attributesObtained);
+            PrivateKeyEntry privateKey = X509Utils.readPrivateKey(cfg.getKeystorePath(), cfg.getKeystoreType(), cfg.getPwdKeystore(), cfg.getAliasCertificate(), cfg.getPwdCertificate());
+            String xmlAuth = SAML2.sp_generateXML(ssi.attributesObtained, privateKey, cfg.getSpMetadataPath());
             String xmlAuthB64 = Base64Fast.encodeToString(xmlAuth.getBytes(), false);
             out.println(NETUtils.getPOSTRedirectPage(serviceURL, "xmlAttrib="+xmlAuthB64));
             

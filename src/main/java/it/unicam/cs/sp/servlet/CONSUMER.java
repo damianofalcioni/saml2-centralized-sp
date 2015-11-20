@@ -38,9 +38,9 @@ public class CONSUMER extends HttpServlet {
 			String samlResponseB64 = request.getParameter("SAMLResponse");
 			String relayState = request.getParameter("RelayState");
 			
-			if(samlResponseB64==null || samlResponseB64=="")
+			if(samlResponseB64==null || samlResponseB64.isEmpty())
 				throw new Exception("ERROR: SAMLResponse is null");
-			if(relayState==null || relayState=="")
+			if(relayState==null || relayState.isEmpty())
 				throw new Exception("ERROR: RelayState is null");
 			
 			ServiceSessionInfo ssi = (ServiceSessionInfo)request.getSession().getAttribute(relayState);

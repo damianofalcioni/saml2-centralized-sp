@@ -12,6 +12,7 @@ import java.security.Signature;
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import javax.xml.crypto.dsig.CanonicalizationMethod;
@@ -43,23 +44,29 @@ import it.unicam.cs.utils.X509Utils;
 import it.unicam.cs.utils.XMLUtils;
 
 public class SAML2 {
-
+    /*
 	public static void main(String[] args) {
 		try {
-			Configuration cfg = new Configuration("D:\\TOOLS\\eclipse\\workspace\\SPManager\\config\\config.xml");
-			PrivateKeyEntry key = X509Utils.readPrivateKey(cfg.getKeystorePath(), cfg.getKeystoreType(), cfg.getPwdKeystore(), cfg.getAliasCertificate(), cfg.getPwdCertificate());
-			String spEntityID = "spmanager";
-			String aaEntityID = "https://idp.cs.unicam.it/idp/shibboleth";
-			String subjectID = "damiano.falcioni@unicam.it";
-			AttributeInfo attribute = new AttributeInfo();
-			attribute.name = "urn:oid:0.9.2342.19200300.100.1.1";
-			attribute.nameFormat = "urn:oasis:names:tc:SAML:2.0:attrname-format:uri";
-			AttributeInfo[] attributeList = null;
-			String query = SAML2.sp_generateSamlAttributeQuery(SAML2.saml_chooseFederationToUse(aaEntityID, spEntityID, cfg.getAllFederationMetadataURI()), spEntityID, aaEntityID, subjectID, NameIDFormat.unspecified, key, attributeList);
-			//ritorna gli attributi solo se la sessione sull'idp è ancora buona
-			String ret = SAML2.sp_sendRequestUsingSoap(query, aaEntityID, SAML2.saml_chooseFederationToUse(aaEntityID, cfg.getAllFederationMetadataURI()));
-			SAML2.sp_validateSamlResponse(ret, SAML2.saml_chooseFederationToUse(aaEntityID, spEntityID, cfg.getAllFederationMetadataURI()), spEntityID, true);
-			System.out.println(ret);
+		    //String date1 = "2015-11-20T13:07:06.6823694Z";
+		    //Date date1D = Utils.stringToDate(date1);
+		    //Date currentTime = new Date();
+		    //System.out.println("date1: " + date1D.getTime() + " -> "+Utils.getUTCTime(date1D));
+		    //System.out.println("curre: " + currentTime.getTime() + " -> "+Utils.getUTCTime(currentTime));
+		    
+//			Configuration cfg = new Configuration("D:\\TOOLS\\eclipse\\workspace\\SPManager\\config\\config.xml");
+//			PrivateKeyEntry key = X509Utils.readPrivateKey(cfg.getKeystorePath(), cfg.getKeystoreType(), cfg.getPwdKeystore(), cfg.getAliasCertificate(), cfg.getPwdCertificate());
+//			String spEntityID = "spmanager";
+//			String aaEntityID = "https://idp.cs.unicam.it/idp/shibboleth";
+//			String subjectID = "damiano.falcioni@unicam.it";
+//			AttributeInfo attribute = new AttributeInfo();
+//			attribute.name = "urn:oid:0.9.2342.19200300.100.1.1";
+//			attribute.nameFormat = "urn:oasis:names:tc:SAML:2.0:attrname-format:uri";
+//			AttributeInfo[] attributeList = null;
+//			String query = SAML2.sp_generateSamlAttributeQuery(SAML2.saml_chooseFederationToUse(aaEntityID, spEntityID, cfg.getAllFederationMetadataURI()), spEntityID, aaEntityID, subjectID, NameIDFormat.unspecified, key, attributeList);
+//			//ritorna gli attributi solo se la sessione sull'idp ï¿½ ancora buona
+//			String ret = SAML2.sp_sendRequestUsingSoap(query, aaEntityID, SAML2.saml_chooseFederationToUse(aaEntityID, cfg.getAllFederationMetadataURI()));
+//			SAML2.sp_validateSamlResponse(ret, SAML2.saml_chooseFederationToUse(aaEntityID, spEntityID, cfg.getAllFederationMetadataURI()), spEntityID, true);
+//			System.out.println(ret);
 			//String samlResponse = new String(readFile(new File("C:\\Users\\Mi0\\Desktop\\respSaml.txt")));
 			//sp_validateSamlResponse(samlResponse, "C:\\Users\\Mi0\\Desktop\\cohesion-federated-metadata.xml", "cohesion.regione.marche.it:sp", true);
 
@@ -72,17 +79,17 @@ public class SAML2 {
 			//System.out.println(SAML2.saml_generateDetachedSignature("ciao", key));
 			//System.out.println(saml_chooseFederationToUse("cohesion.regione.marche.it:idp", "cohesion.regione.marche.it:sp", new String[]{"C:\\Users\\Mi0\\Desktop\\cohesion-federated-metadata.xml"}));
 			//System.out.println(saml_getEntityIDFromMetadata("C:\\Users\\Mi0\\Desktop\\cohesion-sp-metadata.xml"));
-			/*
-			idpInfo[] retList = wayf_getAllIdpInfo("C:\\Users\\Mi0\\Desktop\\cohesion-federated-metadata.xml");
-			for(idpInfo ret:retList)
-				for(String url:ret.imgUrlList)
-					System.out.println(ret.id + "->" + url);
-			*/
+			
+			//idpInfo[] retList = wayf_getAllIdpInfo("C:\\Users\\Mi0\\Desktop\\cohesion-federated-metadata.xml");
+			//for(idpInfo ret:retList)
+			//	for(String url:ret.imgUrlList)
+			//		System.out.println(ret.id + "->" + url);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+	*/
 	public enum AuthnContext{
 		InternetProtocolPassword("urn:oasis:names:tc:SAML:2.0:ac:classes:InternetProtocolPassword"),
         Kerberos("urn:oasis:names:tc:SAML:2.0:ac:classes:Kerberos"),
@@ -163,7 +170,7 @@ public class SAML2 {
 		authnRequestNode.appendChild(nameIDPolicyNode);
 		nameIDPolicyNode.setAttribute("Format", "urn:oasis:names:tc:SAML:2.0:nameid-format:transient");
 		nameIDPolicyNode.setAttribute("SPNameQualifier", spEntityID);
-		//nameIDPolicyNode.setAttribute("AllowCreate", "false"); per spid o non c'è o è true
+		//nameIDPolicyNode.setAttribute("AllowCreate", "false"); per spid o non c'e' o e' true
 		
 
 		if(authnContextList!=null && authnContextList.length!=0){
@@ -234,14 +241,16 @@ public class SAML2 {
 		*/
 		
 		Element conditions =  (Element) XMLUtils.execXPath(samlResponseXml.getDocumentElement(), "//*[local-name()='Conditions']", XPathConstants.NODE);
+
+		Date currentTime = new Date();
 		if(conditions!=null){
-			if(conditions.hasAttribute("NotBefore"))
-				if(Utils.stringToDate(Utils.getUTCTime()).before(Utils.stringToDate(conditions.getAttribute("NotBefore"))))
-					throw new Exception("ERROR: SAML Assertion condition NotBefore not valid: " + Utils.getUTCTime() + " before " + conditions.getAttribute("NotBefore"));
-			if(conditions.hasAttribute("NotOnOrAfter"))
-				if(Utils.stringToDate(Utils.getUTCTime()).after(Utils.stringToDate(conditions.getAttribute("NotOnOrAfter"))))
-					throw new Exception("ERROR: SAML Assertion condition NotOnOrAfter not valid: " + conditions.getAttribute("NotOnOrAfter"));
-		}
+            if(conditions.hasAttribute("NotBefore"))
+                if(currentTime.getTime() < Utils.stringToDate(conditions.getAttribute("NotBefore")).getTime())
+                    throw new Exception("ERROR: SAML Assertion condition NotBefore not valid: " + Utils.getUTCTime(currentTime) + " before " + conditions.getAttribute("NotBefore"));
+            if(conditions.hasAttribute("NotOnOrAfter"))
+                if(currentTime.getTime() >= Utils.stringToDate(conditions.getAttribute("NotOnOrAfter")).getTime())
+                    throw new Exception("ERROR: SAML Assertion condition NotOnOrAfter not valid: " + Utils.getUTCTime(currentTime) + " after " + conditions.getAttribute("NotOnOrAfter"));
+        }
 		
 		NodeList subjectConfirmationDataList =  (NodeList) XMLUtils.execXPath(samlResponseXml.getDocumentElement(), "//*[local-name()='SubjectConfirmationData']", XPathConstants.NODESET);
 		for(int i=0;i<subjectConfirmationDataList.getLength();i++){
@@ -250,11 +259,11 @@ public class SAML2 {
 				if(!consumerUrl.equals(subjectConfirmationData.getAttribute("Recipient")))
 					throw new Exception("ERROR: SAML Assertion Recipient not valid\nExpected: " + consumerUrl + "\nReturned: " + subjectConfirmationData.getAttribute("Recipient"));
 			if(subjectConfirmationData.hasAttribute("NotBefore"))
-				if(Utils.stringToDate(Utils.getUTCTime()).before(Utils.stringToDate(subjectConfirmationData.getAttribute("NotBefore"))))
-					throw new Exception("ERROR: SAML Assertion NotBefore not valid: " + subjectConfirmationData.getAttribute("NotBefore"));
+				if(currentTime.getTime() < Utils.stringToDate(subjectConfirmationData.getAttribute("NotBefore")).getTime())
+					throw new Exception("ERROR: SAML Assertion NotBefore not valid: " + Utils.getUTCTime(currentTime) + " before " + subjectConfirmationData.getAttribute("NotBefore"));
 			if(subjectConfirmationData.hasAttribute("NotOnOrAfter"))
-				if(Utils.stringToDate(Utils.getUTCTime()).after(Utils.stringToDate(subjectConfirmationData.getAttribute("NotOnOrAfter"))))
-					throw new Exception("ERROR: SAML Assertion NotOnOrAfter not valid: " + subjectConfirmationData.getAttribute("NotOnOrAfter"));
+				if(currentTime.getTime() >= Utils.stringToDate(subjectConfirmationData.getAttribute("NotOnOrAfter")).getTime())
+					throw new Exception("ERROR: SAML Assertion NotOnOrAfter not valid: " + Utils.getUTCTime(currentTime) + " after " + subjectConfirmationData.getAttribute("NotOnOrAfter"));
 		}
 	}
 	
@@ -301,6 +310,8 @@ public class SAML2 {
 		lastAttributeInfo.friendlyName = "NameID";
 		String nameID =  (String) XMLUtils.execXPath(samlResponseXml.getDocumentElement(), "//*[local-name()='NameID']", XPathConstants.STRING);
 		String nameIDFormat =  (String) XMLUtils.execXPath(samlResponseXml.getDocumentElement(), "//*[local-name()='NameID']/@Format", XPathConstants.STRING);
+		if(nameIDFormat.isEmpty())
+		    nameIDFormat = "urn:oasis:names:tc:SAML:1.1:nameidformat:unspecified";
 		lastAttributeInfo.nameFormat = nameIDFormat;
 		
 		lastAttributeInfo.valueList = new String[]{nameID};
@@ -349,10 +360,12 @@ public class SAML2 {
 		return ret;
 	}
 
-	public static String sp_generateXML(AttributeInfo[] attributesObtained) throws Exception{
+	public static String sp_generateXML(AttributeInfo[] attributesObtained, PrivateKeyEntry privateKey, String spMetadataPath) throws Exception{
 		Document ret = XMLUtils.createNewDocument();
 		Element attribList = ret.createElement("attributeList");
 		ret.appendChild(attribList);
+		attribList.setAttribute("ID", "1");
+		attribList.setAttribute("entityID", saml_getEntityIDFromSingleMetadata(spMetadataPath));
 		for(AttributeInfo attributeObtained:attributesObtained){
 			Element attrib = ret.createElement("attribute");
 			attribList.appendChild(attrib);
@@ -364,6 +377,15 @@ public class SAML2 {
 				valueEl.setTextContent(value);
 			}
 		}
+		
+		if(privateKey!=null && spMetadataPath!=null && !spMetadataPath.isEmpty()){
+		    Document metadataXml = XMLUtils.getXmlDocFromURI(spMetadataPath);
+            Document signedDoc = saml_signXML(ret.getDocumentElement(), privateKey).getOwnerDocument();
+            if(!saml_verifyXMLSignatures(XMLUtils.getXmlDocFromString(XMLUtils.getStringFromXmlDoc(signedDoc)).getDocumentElement(), metadataXml))
+                throw new Exception("ERROR: Digital Signature invalid \nCheck if the signing certificate is the same you have provided in the federated metadata about SP");
+            ret = signedDoc;
+        }
+		
 		return XMLUtils.getStringFromXmlDoc(ret);
 	}
 	
@@ -657,7 +679,7 @@ public class SAML2 {
 	public static String saml_getDiscoveryReturnUrl(String spID, String returnUrlToCheck, String federatedMetadataUrl) throws Exception{
 		Document metadataXml = XMLUtils.getXmlDocFromURI(federatedMetadataUrl);
 		Node discoveryResponseNode = null;
-		if(returnUrlToCheck == null || returnUrlToCheck == "")
+		if(returnUrlToCheck == null || returnUrlToCheck.isEmpty())
 			discoveryResponseNode = (Node) XMLUtils.execXPath(metadataXml.getDocumentElement(), "//*[local-name()='EntityDescriptor'][@entityID='"+spID+"']//*[local-name()='DiscoveryResponse']", XPathConstants.NODE);
 		else
 			discoveryResponseNode = (Node) XMLUtils.execXPath(metadataXml.getDocumentElement(), "//*[local-name()='EntityDescriptor'][@entityID='"+spID+"']//*[local-name()='DiscoveryResponse'][@Location='"+returnUrlToCheck+"']", XPathConstants.NODE);
@@ -758,7 +780,7 @@ public class SAML2 {
 		
 		Node issuerNode =  (Node) XMLUtils.execXPath(doc, ".//*[local-name()='Issuer']", XPathConstants.NODE);
 		if(issuerNode!=null)
-			dsc.setNextSibling(issuerNode.getNextSibling()); //la firma per asserzioni e richieste/risposte saml và dopo il nodo Issuer
+			dsc.setNextSibling(issuerNode.getNextSibling()); //la firma per asserzioni e richieste/risposte saml va dopo il nodo Issuer
 		else
 			dsc.setNextSibling(doc.getFirstChild()); //la firma per i metadati va come primo elemento
 

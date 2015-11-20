@@ -1,7 +1,8 @@
 <md:EntityDescriptor entityID="SAML2CentralizedSP" 
 					xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" 
 					xmlns:xml="http://www.w3.org/XML/1998/namespace">
-	<md:SPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+	<md:SPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol"
+                        AuthnRequestSigned="true">
 		<md:Extensions>
 			<idpdisc:DiscoveryResponse index="1" 
 							xmlns:idpdisc="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol" 
@@ -43,10 +44,11 @@ IlXR</ds:X509Certificate>
 
 		<md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" 
     								Location="http://localhost:8080/saml2-centralized-sp/CONSUMER" 
-    								index="1"/>
+    								index="0"
+                                    isDefault="true"/>
     	<md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" 
     								Location="http://localhost:8080/saml2-centralized-sp/CONSUMER" 
-    								index="2"/>
+    								index="1"/>
 
 		<md:AttributeConsumingService index="1">
 			<md:ServiceName xml:lang="it">Servizio 1</md:ServiceName>

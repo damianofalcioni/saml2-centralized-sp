@@ -77,7 +77,7 @@ public class LOGOUT extends HttpServlet {
 					throw new Exception("ERROR: The IdP " + idpEntityId+ " doesn't support Single Logout");
 				
 				String relayState = "";
-				String samlLogoutRequest = SAML2.sp_generateSamlLogoutRequest(federationToUseMetadataUrl, spEntityID, idpEntityId, attribNameID.name, attribNameID.nameFormat, privateKey);
+				String samlLogoutRequest = SAML2.sp_generateSamlLogoutRequest(federationToUseMetadataUrl, spEntityID, idpEntityId, attribNameID.valueList[0], attribNameID.nameFormat, privateKey);
 				Utils.log(samlLogoutRequest, cfg, LogType.requests);
 				String samlLogoutRequestB64 = Base64Fast.encodeToString(samlLogoutRequest.getBytes(), false);
 				response.getWriter().println(NETUtils.getPOSTRedirectPage(idpLogoutUrl+"?SAMLRequest="+samlLogoutRequestB64+"&RelayState="+relayState));

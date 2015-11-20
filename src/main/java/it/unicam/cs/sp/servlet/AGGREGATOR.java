@@ -37,7 +37,7 @@ public class AGGREGATOR extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try{			
 			String relayState = request.getParameter("relayState");
-			if(relayState==null || relayState=="")
+			if(relayState==null || relayState.isEmpty())
 				throw new Exception("ERROR: relayState is null");
 			
 			ServiceSessionInfo ssi = (ServiceSessionInfo)request.getSession().getAttribute(relayState);
