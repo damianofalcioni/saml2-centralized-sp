@@ -4,11 +4,8 @@
 package it.unicam.cs.utils;
 
 import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.InputStream;
-import java.io.RandomAccessFile;
 import java.net.URL;
 import java.security.KeyStore;
 import java.security.KeyStore.PrivateKeyEntry;
@@ -56,19 +53,6 @@ public class X509Utils {
 		return false;
 	}
 	
-	public static byte[] readFile(File file) throws Exception{
-		RandomAccessFile raf = new RandomAccessFile(file, "r");
-		byte[] ret = new byte[(int)raf.length()];
-		raf.read(ret);
-		raf.close();
-		return ret;
-	}
-	public static void writeFile(byte[] data, String filePath, boolean appendData) throws Exception{
-		FileOutputStream fos = new FileOutputStream(new File(filePath), appendData);
-		fos.write(data);
-		fos.flush();
-		fos.close();
-	}
 	public static X509Certificate getX509Certificate(String x509Certificate) throws Exception {
 		//String file = new String(readFile(new File("C:\\Users\\Mi0\\Desktop\\test.cer")));
 		//x509Certificate= file;
